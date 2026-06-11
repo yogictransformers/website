@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STEAM Camp 2026 programs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E2766; --navy:#1C3D8F; --navy-deep:#0B2050;
+    --orange:#EC7322; --orange-soft:#FFF1E5;
+    --green:#46A23B;
+    --page:#F3F7FF; --card:#FFFFFF; --line:#E1EAF8; --line-2:#EDF3FD;
+    --muted:#5A6B95; --muted-2:#8794B5;
+    /* pillar colors */
+    --p-rob:#2E66C4; --p-prog:#2E9E44; --p-eng:#E8730C; --p-des:#7C3AED; --p-lead:#0E8C9E; --p-comp:#3B4E94;
+    --shadow:0 1px 2px rgba(16,39,102,.06), 0 8px 24px rgba(16,39,102,.07);
+    --shadow-lg:0 12px 40px rgba(16,39,102,.13);
+    --radius:18px;
+    --display:'Baloo 2', ui-rounded, 'Segoe UI', system-ui, sans-serif;
+    --body:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --util:'Space Grotesk', ui-monospace, 'Segoe UI', sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; scroll-padding-top:84px}
+  body{margin:0; background:var(--page); color:#16224A; font-family:var(--body); font-size:16px; line-height:1.6;
+    background-image:radial-gradient(1200px 480px at 88% -8%, #E9F0FF 0, rgba(233,240,255,0) 60%),
+                     radial-gradient(900px 420px at 0% 0%, #FFF0E4 0, rgba(255,240,228,0) 55%);}
+  a{color:var(--navy); text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3,h4{font-family:var(--display); color:var(--ink); margin:0; line-height:1.12; letter-spacing:-.01em}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 22px}
+  .eyebrow{font-family:var(--util); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-weight:600; color:var(--orange)}
+
+  /* ---------- top nav ---------- */
+  .nav{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.86); backdrop-filter:saturate(160%) blur(10px);
+    border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex; align-items:center; gap:18px; height:64px}
+  .brand{display:flex; align-items:center; gap:10px; font-family:var(--display); font-weight:800; color:var(--ink); font-size:18px; white-space:nowrap}
+  .brand b{color:var(--orange)}
+  .brand .dot{width:12px;height:12px;border-radius:4px;background:conic-gradient(from 210deg,var(--p-rob),var(--p-prog),var(--p-eng),var(--p-des),var(--p-lead),var(--p-rob))}
+  .navlinks{display:flex; gap:4px; margin-left:auto; flex-wrap:wrap}
+  .navlinks a{font-family:var(--util); font-size:13.5px; font-weight:500; color:var(--muted); padding:8px 11px; border-radius:9px}
+  .navlinks a:hover{color:var(--ink); background:var(--line-2); text-decoration:none}
+  .navlinks a.active{color:var(--ink); background:#E8EFFD}
+  .btn{display:inline-flex; align-items:center; gap:8px; background:var(--orange); color:#fff; font-weight:700; font-family:var(--display);
+    padding:9px 16px; border-radius:11px; box-shadow:0 6px 16px rgba(236,115,34,.28); white-space:nowrap; border:0; cursor:pointer; font-size:15px}
+  .btn:hover{background:#d9641a; text-decoration:none; transform:translateY(-1px)}
+  .btn.ghost{background:#fff; color:var(--navy); border:1.5px solid var(--line); box-shadow:none}
+  .btn.ghost:hover{background:var(--line-2); border-color:#cfdcf4}
+  .nav .btn{padding:8px 14px; font-size:14px}
+
+  /* ---------- hero ---------- */
+  .hero{padding:54px 0 34px}
+  .hero h1{font-size:clamp(34px,5.4vw,58px); font-weight:800}
+  .hero h1 .yr{color:var(--orange)}
+  .hero .lede{font-size:clamp(16px,2.2vw,19px); color:var(--muted); max-width:62ch; margin:14px 0 0}
+  .facts{display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 6px}
+  .fact{display:flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--line); border-radius:999px; padding:7px 14px; font-weight:600; font-size:14px; color:var(--ink); box-shadow:var(--shadow)}
+  .fact .k{color:var(--muted-2); font-weight:600}
+  .hero-cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+  .ribbon{margin-top:22px; font-size:14.5px; color:var(--navy); background:linear-gradient(0deg,#fff,#fff) padding-box, linear-gradient(90deg,var(--p-rob),var(--p-des)) border-box;
+    border:1px solid transparent; border-radius:12px; padding:11px 16px; display:inline-block; font-weight:600}
+
+  /* ---------- pillar legend / filter ---------- */
+  .pillars{display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin-top:26px}
+  .pill-tile{position:relative; border-radius:14px; padding:14px 13px 13px; color:#fff; min-height:104px; cursor:pointer; border:0; text-align:left;
+    display:flex; flex-direction:column; justify-content:space-between; box-shadow:var(--shadow); transition:transform .15s, box-shadow .15s, filter .15s; font-family:var(--body)}
+  .pill-tile:hover{transform:translateY(-3px); box-shadow:var(--shadow-lg)}
+  .pill-tile .ic{font-size:22px; line-height:1}
+  .pill-tile .nm{font-family:var(--display); font-weight:700; font-size:15px; line-height:1.1; margin-top:8px}
+  .pill-tile .ct{font-size:12px; font-weight:600; opacity:.92; font-family:var(--util)}
+  .pill-tile[aria-pressed="true"]{outline:3px solid #16224A; outline-offset:2px}
+  .pill-tile[data-dim="1"]{filter:grayscale(.55) brightness(1.04); opacity:.5}
+  .p-rob{background:linear-gradient(160deg,#3a74d4,var(--p-rob))}
+  .p-prog{background:linear-gradient(160deg,#3bb350,var(--p-prog))}
+  .p-eng{background:linear-gradient(160deg,#f6892a,var(--p-eng))}
+  .p-des{background:linear-gradient(160deg,#8e54f0,var(--p-des))}
+  .p-lead{background:linear-gradient(160deg,#16a3b6,var(--p-lead))}
+  .p-comp{background:linear-gradient(160deg,#4a5ea8,var(--p-comp))}
+
+  /* ---------- section frame ---------- */
+  .section{padding:46px 0}
+  .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:8px}
+  .section-head h2{font-size:clamp(26px,3.6vw,38px); font-weight:800}
+  .section-head .sub{color:var(--muted); max-width:60ch; margin-top:8px}
+  hr.rule{border:0; border-top:1px solid var(--line); margin:0}
+
+  /* ---------- weeks timeline ---------- */
+  .timeline{position:relative; margin-top:26px}
+  .timeline::before{content:""; position:absolute; left:30px; top:14px; bottom:14px; width:3px;
+    background:linear-gradient(var(--p-rob),var(--p-prog),var(--p-eng),var(--p-des),var(--p-comp)); border-radius:3px; opacity:.5}
+  .week{position:relative; display:grid; grid-template-columns:64px 1fr; gap:20px; margin-bottom:18px}
+  .wk-num{position:relative; z-index:1; width:62px; height:62px; border-radius:18px; display:grid; place-items:center;
+    font-family:var(--display); font-weight:800; font-size:24px; color:#fff; box-shadow:var(--shadow)}
+  .wk-num small{display:block; font-family:var(--util); font-size:9px; letter-spacing:.12em; font-weight:600; opacity:.85; margin-top:-2px}
+  .wk-card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
+  .wk-card .top{display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:18px 20px 4px}
+  .wk-card .title{font-family:var(--display); font-weight:800; font-size:22px; color:var(--ink)}
+  .wk-card .act{font-weight:700; color:var(--navy); margin-top:2px}
+  .wk-card .body{padding:6px 20px 18px}
+  .wk-card p{margin:10px 0 0}
+  .meta{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px}
+
+  /* ---------- chips / tags ---------- */
+  .tag{display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; padding:4px 11px; border-radius:999px; white-space:nowrap; font-family:var(--util)}
+  .tag.date{background:#EEF4FF; color:var(--navy)}
+  .tag.grade{background:#FFF1E5; color:#B95B14}
+  .tag.dur{background:#EAF7EC; color:#2C7A2E}
+  .tag.mat{background:#F2F1FB; color:#5B3AB0}
+  .tag.pillar{color:#fff}
+  .pc-rob{background:var(--p-rob)} .pc-prog{background:var(--p-prog)} .pc-eng{background:var(--p-eng)}
+  .pc-des{background:var(--p-des)} .pc-lead{background:var(--p-lead)} .pc-comp{background:var(--p-comp)}
+  .price{font-family:var(--display); font-weight:800; color:var(--orange)}
+
+  /* collapsible outcome */
+  .outcome{margin-top:12px; border-top:1px dashed var(--line); padding-top:10px}
+  .outcome > summary{cursor:pointer; list-style:none; font-family:var(--util); font-size:12.5px; font-weight:600; letter-spacing:.04em;
+    color:var(--navy); display:inline-flex; align-items:center; gap:7px; text-transform:uppercase}
+  .outcome > summary::-webkit-details-marker{display:none}
+  .outcome > summary .tw{transition:transform .2s; font-size:11px}
+  .outcome[open] > summary .tw{transform:rotate(90deg)}
+  .outcome p{margin:8px 0 0; color:var(--muted); font-size:14.5px}
+
+  /* ---------- activity controls ---------- */
+  .controls{position:sticky; top:64px; z-index:40; background:rgba(243,247,255,.92); backdrop-filter:blur(8px);
+    border:1px solid var(--line); border-radius:16px; padding:14px; margin-top:22px; box-shadow:var(--shadow)}
+  .ctl-row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+  .search{flex:1 1 240px; display:flex; align-items:center; gap:9px; background:#fff; border:1.5px solid var(--line); border-radius:11px; padding:9px 13px}
+  .search input{border:0; outline:0; font:inherit; width:100%; color:#16224A; background:transparent}
+  .search svg{flex:none; color:var(--muted-2)}
+  .selectwrap{display:flex; align-items:center; gap:8px; background:#fff; border:1.5px solid var(--line); border-radius:11px; padding:0 12px; font-family:var(--util); font-size:13px; font-weight:600; color:var(--muted)}
+  .selectwrap select{border:0; outline:0; background:transparent; font:inherit; color:var(--ink); padding:10px 4px; cursor:pointer}
+  .fbtn{font-family:var(--util); font-size:13px; font-weight:600; border:1.5px solid var(--line); background:#fff; color:var(--muted);
+    border-radius:11px; padding:9px 13px; cursor:pointer}
+  .fbtn[aria-pressed="true"]{background:#16224A; color:#fff; border-color:#16224A}
+  .ctl-row.cats{margin-top:10px}
+  .catbtn{font-family:var(--util); font-size:12.5px; font-weight:600; border:1.5px solid var(--line); background:#fff; color:var(--muted);
+    border-radius:999px; padding:7px 13px; cursor:pointer; display:inline-flex; align-items:center; gap:7px}
+  .catbtn .swatch{width:10px;height:10px;border-radius:50%}
+  .catbtn[aria-pressed="true"]{color:#fff; border-color:transparent}
+  .catbtn[aria-pressed="true"][data-cat="robotics"]{background:var(--p-rob)}
+  .catbtn[aria-pressed="true"][data-cat="programming"]{background:var(--p-prog)}
+  .catbtn[aria-pressed="true"][data-cat="engineering"]{background:var(--p-eng)}
+  .catbtn[aria-pressed="true"][data-cat="design"]{background:var(--p-des)}
+  .catbtn[aria-pressed="true"][data-cat="leadership"]{background:var(--p-lead)}
+  .catbtn[aria-pressed="true"][data-cat="competition"]{background:var(--p-comp)}
+  .ctl-foot{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:11px; flex-wrap:wrap}
+  .count{font-family:var(--util); font-size:13px; color:var(--muted); font-weight:600}
+  .count b{color:var(--ink)}
+  .linkbtn{background:none; border:0; color:var(--navy); font-family:var(--util); font-weight:600; font-size:13px; cursor:pointer; padding:0}
+  .linkbtn:hover{text-decoration:underline}
+
+  /* jump index */
+  .jump{margin-top:16px}
+  .jump summary{cursor:pointer; font-family:var(--util); font-weight:600; font-size:13px; color:var(--navy); text-transform:uppercase; letter-spacing:.05em}
+  .jump .idx{display:flex; flex-wrap:wrap; gap:7px; margin-top:12px}
+  .jump .idx a{font-size:12.5px; font-weight:600; background:#fff; border:1px solid var(--line); border-radius:999px; padding:5px 11px; color:var(--muted)}
+  .jump .idx a:hover{color:var(--ink); border-color:#cfdcf4; text-decoration:none}
+  .jump .idx a::before{content:""; display:inline-block; width:8px;height:8px;border-radius:50%; margin-right:7px; vertical-align:1px; background:var(--c,#ccc)}
+
+  /* ---------- activity grid ---------- */
+  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:20px}
+  .card{position:relative; background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:18px 20px 18px 22px; overflow:hidden; transition:box-shadow .15s, transform .15s}
+  .card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:6px; background:var(--c,#ccc)}
+  .card:hover{box-shadow:var(--shadow-lg); transform:translateY(-2px)}
+  .card .ctop{display:flex; align-items:flex-start; justify-content:space-between; gap:10px}
+  .card h3{font-size:19px; font-weight:700; color:var(--ink); margin-bottom:2px}
+  .card p.desc{color:#37456E; font-size:14.6px; margin:10px 0 0}
+  .card .foot{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:13px; padding-top:11px; border-top:1px solid var(--line-2); flex-wrap:wrap}
+  .card .price-line{font-size:13px; color:var(--muted); font-family:var(--util); font-weight:600}
+  .reglink{font-family:var(--util); font-weight:600; font-size:13px; color:var(--orange); display:inline-flex; align-items:center; gap:5px}
+  .reglink:hover{text-decoration:underline}
+  .noresult{grid-column:1/-1; text-align:center; color:var(--muted); padding:46px 0; font-family:var(--util)}
+  .hidden{display:none !important}
+
+  /* ---------- pricing ---------- */
+  .pricecards{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:24px}
+  .pcard{background:#fff; border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px; display:flex; flex-direction:column}
+  .pcard h3{font-size:20px; font-weight:800}
+  .pcard .kicker{font-family:var(--util); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; font-weight:600; margin-bottom:6px}
+  .pcard ul{list-style:none; padding:0; margin:14px 0 16px}
+  .pcard li{display:flex; justify-content:space-between; gap:12px; padding:9px 0; border-bottom:1px dashed var(--line); font-size:14.5px}
+  .pcard li:last-child{border-bottom:0}
+  .pcard li span:first-child{color:#37456E}
+  .pcard .btn{margin-top:auto}
+  .pk-camp{color:var(--navy)} .pk-act{color:var(--green)} .pk-sky{color:var(--orange)}
+
+  /* ---------- register / contact ---------- */
+  .cta-band{background:linear-gradient(135deg,var(--navy-deep),var(--navy)); color:#fff; border-radius:24px; padding:38px 34px; margin-top:8px;
+    display:flex; align-items:center; justify-content:space-between; gap:26px; flex-wrap:wrap; box-shadow:var(--shadow-lg)}
+  .cta-band h2{color:#fff; font-size:clamp(24px,3.4vw,34px)}
+  .cta-band p{color:#C9D6F5; margin:8px 0 0; max-width:46ch}
+  .cta-band .btn{background:var(--orange)}
+  .contact{display:flex; gap:26px; flex-wrap:wrap; margin-top:26px}
+  .contact .ci{display:flex; align-items:center; gap:11px}
+  .contact .ci .ic{width:40px;height:40px;border-radius:11px; background:#EEF4FF; color:var(--navy); display:grid; place-items:center; font-size:18px}
+  .contact .ci .lbl{font-family:var(--util); font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted-2); font-weight:600}
+  .contact .ci a, .contact .ci span{font-weight:700; color:var(--ink)}
+
+  footer.foot{padding:34px 0 60px; color:var(--muted); font-size:13.5px}
+  footer.foot .note{background:#fff; border:1px solid var(--line); border-radius:12px; padding:13px 16px; margin-bottom:14px}
+
+  /* back to top */
+  #toTop{position:fixed; right:20px; bottom:20px; z-index:60; width:46px; height:46px; border-radius:13px; border:0; cursor:pointer;
+    background:var(--ink); color:#fff; font-size:20px; box-shadow:var(--shadow-lg); opacity:0; pointer-events:none; transition:opacity .25s, transform .15s}
+  #toTop.show{opacity:1; pointer-events:auto}
+  #toTop:hover{transform:translateY(-2px)}
+
+  /* reveal anim */
+  .reveal{opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease}
+  .reveal.in{opacity:1; transform:none}
+
+  *:focus-visible{outline:3px solid #2E66C4; outline-offset:2px; border-radius:6px}
+
+  @media (max-width:920px){
+    .pillars{grid-template-columns:repeat(3,1fr)}
+    .grid{grid-template-columns:1fr}
+    .pricecards{grid-template-columns:1fr}
+    .navlinks{display:none}
+  }
+  @media (max-width:560px){
+    .pillars{grid-template-columns:repeat(2,1fr)}
+    .week{grid-template-columns:48px 1fr; gap:12px}
+    .timeline::before{left:22px}
+    .wk-num{width:46px;height:46px;border-radius:14px;font-size:18px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto !important}
+    .reveal{opacity:1; transform:none; transition:none}
+    .card:hover,.pill-tile:hover,.btn:hover{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="dot"></span><b>Yogic</b> Transformers <span style="color:var(--muted);font-weight:600">STEAM</span></a>
+    <div class="navlinks" id="navlinks">
+      <a href="#overview">Overview</a>
+      <a href="#weeks">Adventure Weeks</a>
+      <a href="#topics">Activity Topics</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#register">Register</a>
+    </div>
+    <a class="btn" href="https://tinyurl.com/yt-steam-camp-2026" target="_blank" rel="noopener">Save your spot</a>
+  </div>
+</nav>
+
+<span id="top"></span>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero" id="overview">
+  <div class="wrap">
+    <span class="eyebrow">Summer 2026 · Ashburn, VA</span>
+    <h1>Yogic Transformers<br>STEAM Camp <span class="yr">2026</span></h1>
+    <p class="lede">One place to explore everything we offer this summer — eight themed <b>Adventure Weeks</b> and seventeen <b>STEAM Activity topics</b> spanning robotics, programming, engineering, design, and leadership. Search, filter by grade or session length, and tap through to register.</p>
+
+    <div class="facts">
+      <span class="fact"><span class="k">Season</span> Jun 19 – Aug 16, 2026</span>
+      <span class="fact"><span class="k">For</span> Rising 2nd – 12th graders</span>
+      <span class="fact"><span class="k">Where</span> Ashburn, VA</span>
+      <span class="fact"><span class="k">Catalog</span> 8 weeks · 17 topics</span>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn" href="https://tinyurl.com/yt-steam-camp-2026" target="_blank" rel="noopener">Register now →</a>
+      <a class="btn ghost" href="#topics">Browse activity topics</a>
+    </div>
+
+    <div class="ribbon">Run by college students, high-school students &amp; coaches with a decade of experience · students raising funds for local schools &amp; non-profit causes.</div>
+
+    <!-- Pillar legend = live filter -->
+    <div class="pillars" id="pillarLegend" aria-label="Filter activity topics by STEAM area">
+      <button class="pill-tile p-rob"  data-cat="robotics"    aria-pressed="false"><span class="ic">🤖</span><div><div class="nm">Robotics</div><div class="ct">3 topics</div></div></button>
+      <button class="pill-tile p-prog" data-cat="programming" aria-pressed="false"><span class="ic">&lt;/&gt;</span><div><div class="nm">Programming</div><div class="ct">4 topics</div></div></button>
+      <button class="pill-tile p-eng"  data-cat="engineering" aria-pressed="false"><span class="ic">📐</span><div><div class="nm">Engineering</div><div class="ct">1 topic</div></div></button>
+      <button class="pill-tile p-des"  data-cat="design"      aria-pressed="false"><span class="ic">🎨</span><div><div class="nm">Design &amp; Creativity</div><div class="ct">5 topics</div></div></button>
+      <button class="pill-tile p-lead" data-cat="leadership"  aria-pressed="false"><span class="ic">🎤</span><div><div class="nm">Leadership &amp; Comm.</div><div class="ct">2 topics</div></div></button>
+      <button class="pill-tile p-comp" data-cat="competition" aria-pressed="false"><span class="ic">🏆</span><div><div class="nm">Competition Prep</div><div class="ct">2 topics</div></div></button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== ADVENTURE WEEKS ===================== -->
+<section class="section" id="weeks">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Weekly themed camps · Grades 4–8</span>
+        <h2>8 STEAM Adventure Weeks</h2>
+        <p class="sub">Each week is its own themed mission with a single focus activity. Weekday camps run 10 AM – 4 PM — choose Half Day (one 3-hour block, <span class="price">$300</span>) or Full Day (two 3-hour blocks, <span class="price">$500</span>) per week. Register for one or more weeks.</p>
+      </div>
+      <a class="btn ghost" href="#pricing">See camp pricing</a>
+    </div>
+    <div class="timeline" id="weeksTimeline"></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ===================== ACTIVITY TOPICS ===================== -->
+<section class="section" id="topics">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">STEAM Activities · once a week · 8 sessions</span>
+        <h2>STEAM Activity Topics</h2>
+        <p class="sub">Year-round-style activity courses meeting once a week for 8 sessions, 10 AM – 7 PM, across the Jun 19 – Aug 16 season. Pick a 1.5-hour block (<span class="price">$300</span>) or a 3-hour block (<span class="price">$500</span>). Filter below to find topics by area, grade, or length.</p>
+      </div>
+    </div>
+
+    <!-- controls -->
+    <div class="controls" role="search">
+      <div class="ctl-row">
+        <label class="search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="q" type="search" placeholder="Search topics, descriptions, materials…" autocomplete="off" aria-label="Search activity topics">
+        </label>
+        <div class="selectwrap"><span>Grade</span>
+          <select id="gradeSel" aria-label="Filter by grade">
+            <option value="any">Any</option>
+            <option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+            <option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+          </select>
+        </div>
+        <button class="fbtn" id="dur15" data-dur="1.5" aria-pressed="false">1.5-hour</button>
+        <button class="fbtn" id="dur3"  data-dur="3"   aria-pressed="false">3-hour</button>
+      </div>
+      <div class="ctl-row cats" id="catRow">
+        <button class="catbtn" data-cat="robotics"    aria-pressed="false"><span class="swatch" style="background:var(--p-rob)"></span>Robotics</button>
+        <button class="catbtn" data-cat="programming" aria-pressed="false"><span class="swatch" style="background:var(--p-prog)"></span>Programming</button>
+        <button class="catbtn" data-cat="engineering" aria-pressed="false"><span class="swatch" style="background:var(--p-eng)"></span>Engineering</button>
+        <button class="catbtn" data-cat="design"      aria-pressed="false"><span class="swatch" style="background:var(--p-des)"></span>Design &amp; Creativity</button>
+        <button class="catbtn" data-cat="leadership"  aria-pressed="false"><span class="swatch" style="background:var(--p-lead)"></span>Leadership &amp; Comm.</button>
+        <button class="catbtn" data-cat="competition" aria-pressed="false"><span class="swatch" style="background:var(--p-comp)"></span>Competition Prep</button>
+      </div>
+      <div class="ctl-foot">
+        <div class="count" id="count">Showing <b>17</b> of 17 topics</div>
+        <button class="linkbtn" id="reset">Reset filters</button>
+      </div>
+    </div>
+
+    <!-- jump index -->
+    <details class="jump">
+      <summary>Jump to a topic</summary>
+      <div class="idx" id="jumpIdx"></div>
+    </details>
+
+    <!-- grid -->
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ===================== PRICING ===================== -->
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Formats &amp; pricing</span>
+        <h2>Pick a format that fits</h2>
+        <p class="sub">Spots are reserved upon registration and confirmed upon payment. Every format builds toward the same goal — hands-on STEAM skills and real project outcomes.</p>
+      </div>
+    </div>
+    <div class="pricecards">
+      <div class="pcard">
+        <div class="kicker pk-camp">Weekly Themed Camps</div>
+        <h3>Adventure Weeks</h3>
+        <p class="sub" style="margin-top:6px">8 weeks · Jun 19 – Aug 16 · weekdays 10 AM – 4 PM · Grades 4–8.</p>
+        <ul>
+          <li><span>Full Day — two 3-hour blocks / weekday</span> <span class="price">$500</span></li>
+          <li><span>Half Day — one 3-hour block / weekday</span> <span class="price">$300</span></li>
+        </ul>
+        <a class="btn ghost" href="#weeks">View the 8 weeks</a>
+      </div>
+      <div class="pcard">
+        <div class="kicker pk-act">STEAM Activities</div>
+        <h3>Activity Topics</h3>
+        <p class="sub" style="margin-top:6px">Once a week · 8 sessions · 10 AM – 7 PM · register for one or more topics.</p>
+        <ul>
+          <li><span>3-hour block · 8 sessions</span> <span class="price">$500</span></li>
+          <li><span>1.5-hour block · 8 sessions</span> <span class="price">$300</span></li>
+        </ul>
+        <a class="btn ghost" href="#topics">Browse 17 topics</a>
+      </div>
+      <div class="pcard">
+        <div class="kicker pk-sky">SKY Kids &amp; SKY Teens</div>
+        <h3>SKY &amp; STEAM Camp</h3>
+        <p class="sub" style="margin-top:6px">Sudarshan Kriya (SKY) Youth Leadership + STEAM · 5 consecutive days · 4 PM – 7 PM.</p>
+        <ul>
+          <li><span>SKY Kids &amp; STEAM (Ages 8–12)</span> <span class="price">$300</span></li>
+          <li><span>SKY Teens &amp; STEAM (Ages 13–19)</span> <span class="price">$300</span></li>
+          <li><span>SKY Follow-up &amp; STEAM (Ages 8–19)</span> <span class="price">$200</span></li>
+        </ul>
+        <a class="btn ghost" href="https://tinyurl.com/yt-steam-camp-2026" target="_blank" rel="noopener">Register for SKY</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== REGISTER / CONTACT ===================== -->
+<section class="section" id="register">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2>Register now &amp; save your spot</h2>
+        <p>Scan-free sign-up at the link below. Reserve your weeks and topics; we'll confirm once payment is received.</p>
+      </div>
+      <a class="btn" href="https://tinyurl.com/yt-steam-camp-2026" target="_blank" rel="noopener">Open registration →</a>
+    </div>
+
+    <div class="contact">
+      <div class="ci"><span class="ic">🔗</span><div><div class="lbl">Registration</div><a href="https://tinyurl.com/yt-steam-camp-2026" target="_blank" rel="noopener">tinyurl.com/yt-steam-camp-2026</a></div></div>
+      <div class="ci"><span class="ic">✉️</span><div><div class="lbl">Email</div><a href="mailto:yogictransformers@gmail.com">yogictransformers@gmail.com</a></div></div>
+      <div class="ci"><span class="ic">📞</span><div><div class="lbl">Call or text</div><a href="tel:+17036623892">703-662-3892</a></div></div>
+      <div class="ci"><span class="ic">📍</span><div><div class="lbl">Location</div><span>43333 Barnstead Dr, Ashburn, VA 20148</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="note"><b>Competition Prep:</b> TSA and Science Olympiad run as student-choice topics — pick your own event and we'll coach you toward regional, state, and national competition.</div>
+    © 2026 Yogic Transformers STEAM Camp · Ashburn, VA · A community program — students raising funds for local schools &amp; non-profit causes.
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Back to top">↑</button>
+
+<script>
+/* ---------- data ---------- */
+const PILLARS = {
+  robotics:    {label:"Robotics",                cls:"rob",  color:"#2E66C4"},
+  programming: {label:"Programming",             cls:"prog", color:"#2E9E44"},
+  engineering: {label:"Engineering",             cls:"eng",  color:"#E8730C"},
+  design:      {label:"Design & Creativity",     cls:"des",  color:"#7C3AED"},
+  leadership:  {label:"Leadership & Comm.",      cls:"lead", color:"#0E8C9E"},
+  competition: {label:"Competition Prep",        cls:"comp", color:"#3B4E94"}
+};
+
+const WEEKS = [
+  {n:1, name:"Rise of the Machines", act:"Battle Bots", cat:"robotics", grades:"4–8", dates:"Jun 22 – 26",
+   desc:"Build, customize, and battle a robot of your own design. Starting with a LEGO-based robotics platform, teams will assemble a base robot, add sensors and custom attachments, and test different strategies to gain an edge in the arena. Through building, programming, and iterative design, students will prepare for an exciting robot sumo competition where the goal is simple: stay in the ring and push the competition out.",
+   out:"Students will discover how engineers combine mechanical design, programming, sensors, and teamwork to create robots that can interact with the world around them. The skills developed throughout the week provide a strong foundation for future studies in robotics, engineering, computer science, and technology while introducing students to activities such as FIRST LEGO League, FTC, VEX, and other robotics competitions."},
+  {n:2, name:"Ready Player One", act:"Video Game Design", cat:"programming", grades:"4–8", dates:"Jun 29 – Jul 3",
+   desc:"Step into the world of game development as you design, code, and bring your own video game to life. From creating characters and game mechanics to testing and refining gameplay, students will experience the full journey from idea to finished game before showcasing their creations for others to play.",
+   out:"Students will discover how programming, logic, creativity, and design come together to create interactive digital experiences. The skills developed throughout the week provide a strong foundation for future studies in computer science, software engineering, game development, and digital technology."},
+  {n:3, name:"Flight Club", act:"Glider Construction", cat:"engineering", grades:"4–8", dates:"Jul 6 – 10",
+   desc:"Take to the skies by designing, building, and testing a high-performance glider. Through hands-on experimentation, students will explore the principles of flight, analyze performance data, and refine their aircraft through multiple rounds of testing. The week concludes with a flight competition and team presentations highlighting the design process, challenges overcome, and lessons learned along the way.",
+   out:"Students will discover how engineers use data, testing, and iteration to improve performance and solve complex challenges. The skills developed throughout the week provide a strong foundation for future studies in aerospace engineering, physics, aviation, and scientific research."},
+  {n:4, name:"I, Robot", act:"Robotics + Programming", cat:"robotics", grades:"4–8", dates:"Jul 13 – 17",
+   desc:"Build and program a robot capable of navigating obstacles, making decisions, and completing missions on its own. Through a combination of engineering, coding, and problem-solving, teams will prepare their robots for the ultimate robotics challenge course.",
+   out:"Students will discover how sensors, electronics, programming, and mechanical systems work together to power modern robots. The skills developed throughout the week provide a strong foundation for future studies in robotics, engineering, computer science, and emerging technologies."},
+  {n:5, name:"Prototype X", act:"Product Design + Marketing", cat:"engineering", grades:"4–8", dates:"Jul 20 – 24",
+   desc:"Turn a bright idea into a market-ready product. Students will move through the full product-design cycle — researching a need, sketching and prototyping a solution, branding it, and pitching it to an audience — balancing engineering constraints with creativity as they learn how great products get designed, built, and marketed.",
+   out:"Students will discover how inventors, designers, and engineers transform ideas into products that people use every day. The skills developed throughout the week provide a strong foundation for future studies in engineering, product design, manufacturing, entrepreneurship, and innovation.", draft:"desc"},
+  {n:6, name:"Level Up", act:"Arcade Game", cat:"programming", grades:"4–8", dates:"Jul 27 – 31",
+   desc:"Design and build your own interactive arcade game using electronics, sensors, code, and custom-designed components. From the first circuit to the final high score, students will combine engineering and creativity to create a game that others can play and enjoy.",
+   out:"Students will discover how electronics, programming, and design come together to create interactive experiences. The skills developed throughout the week provide a strong foundation for future studies in electrical engineering, computer science, game design, and creative technology.", draft:"out"},
+  {n:7, name:"Overwatch", act:"Drones", cat:"engineering", grades:"4–8", dates:"Aug 3 – Aug 7",
+   desc:"Take command of a drone mission by planning flight operations, designing custom payloads and attachments, and completing real-world challenges. Whether surveying terrain, delivering cargo, or conducting search-and-rescue missions, students will experience how drones are transforming industries around the world.",
+   out:"Students will discover how drones combine flight, technology, and data to solve real-world problems. The skills developed throughout the week provide a strong foundation for future studies in aerospace engineering, aviation, robotics, mapping technologies, and mission planning."},
+  {n:8, name:"The Gauntlet", act:"The Capstone Challenge", cat:"competition", grades:"4–8", dates:"Aug 10 – Aug 14",
+   desc:"Put your skills to the test in the ultimate STEAM competition. Through a series of engineering, coding, robotics, design, and problem-solving challenges, students will compete, collaborate, and push their creativity to new heights while battling for the championship title.",
+   out:"Students will discover how the skills learned across multiple STEM disciplines can be combined to tackle unfamiliar challenges and develop innovative solutions. The skills developed throughout the week provide a strong foundation for future studies in engineering, computer science, robotics, design, and interdisciplinary problem-solving."}
+];
+
+const ACTIVITIES = [
+  {id:"fll-explore", name:"FLL Explore", cat:"robotics", gmin:2, gmax:4, durs:[1.5], mat:"iPad / Laptop (Non-Chromebook)",
+   desc:"Build and program LEGO models while exploring real-world STEM challenges through hands-on projects and teamwork. Students will learn basic engineering concepts, simple block-based programming, and presentation skills as they design solutions inspired by the annual FIRST LEGO League Explore theme and share their work with others.",
+   out:"Students will discover how creativity, engineering, and teamwork can be used to solve real-world challenges. The skills developed throughout the program provide a strong foundation for future participation in robotics programs, STEM coursework, project-based learning, and FIRST LEGO League."},
+  {id:"fll", name:"FLL", cat:"robotics", gmin:4, gmax:8, durs:[3], mat:"iPad / Laptop (Non-Chromebook)",
+   desc:"Design, build, and program a LEGO robot to complete missions on an official FIRST LEGO League competition field. Students will learn robot construction, sensor integration, autonomous programming, testing strategies, and engineering documentation while preparing for competition-style challenges.",
+   out:"Students will discover how robot design, programming, sensors, and testing work together to solve engineering challenges. The skills developed throughout the program provide a strong foundation for FIRST LEGO League competitions, robotics teams, engineering studies, and future technology projects."},
+  {id:"ftc", name:"FTC", cat:"robotics", gmin:6, gmax:9, durs:[3], mat:"Laptop",
+   desc:"Experience the engineering process behind competitive robotics by designing mechanisms, programming autonomous routines, and controlling robots through driver-operated challenges. Students will explore concepts such as drivetrain design, sensors, game strategy, CAD, and iterative testing using FTC-inspired projects and activities.",
+   out:"Students will discover how mechanical systems, electronics, programming, and engineering design combine to create advanced robotic systems. The skills developed throughout the program provide a strong foundation for FTC, FRC, engineering programs, robotics competitions, and technical careers."},
+  {id:"intro-python", name:"Intro to Python", cat:"programming", gmin:4, gmax:9, durs:[1.5,3], mat:"Laptop",
+   desc:"Learn the fundamentals of programming through hands-on coding challenges and projects in Python. Students will explore variables, loops, conditionals, functions, data structures, and problem-solving techniques while gaining exposure to popular libraries used for data analysis, visualization, automation, and scientific computing.",
+   out:"Students will discover how programming can be used to solve problems, analyze information, automate tasks, and build useful tools. The skills developed throughout the program provide a strong foundation for computer science, software development, data science, artificial intelligence, and future coding projects."},
+  {id:"intro-java", name:"Intro to Java", cat:"programming", gmin:6, gmax:9, durs:[1.5,3], mat:"Laptop",
+   desc:"Explore object-oriented programming by building applications and solving coding challenges with Java. Students will learn concepts such as classes, objects, methods, variables, loops, and conditionals while developing programs similar to those found in high school and introductory college computer science courses.",
+   out:"Students will discover how programmers design, organize, and build large-scale software systems. The skills developed throughout the program provide a strong foundation for AP Computer Science, software engineering, computer science studies, and future programming projects."},
+  {id:"intro-kotlin", name:"Intro to Kotlin", cat:"programming", gmin:6, gmax:9, durs:[1.5,3], mat:"Laptop",
+   desc:"Explore object-oriented programming by building applications and solving coding challenges with Kotlin. Students will learn concepts such as classes, objects, methods, variables, loops, and conditionals while developing programs similar to those found in high school and introductory college computer science courses.",
+   out:"Students will discover how modern software applications are designed and developed using object-oriented programming principles. The skills developed throughout the program provide a strong foundation for mobile app development, software engineering, computer science studies, and future technology projects."},
+  {id:"ai-ml", name:"Artificial Intelligence / Machine Learning", cat:"programming", gmin:6, gmax:9, durs:[1.5,3], mat:"Laptop (with camera & mic)",
+   desc:"Discover what AI really is by looking inside the black box of machine learning. In this hands-on course, students will transition from passive users to active creators as they design, train, and test their own micro-models using interactive visual tools. Through exciting weekly challenges, students will explore core concepts such as computer vision, training-data bias, neural networks, computer probability, and reinforcement learning, all done without complex coding syntax.",
+   out:"Students will discover how data, mathematical probability, and iterative training combine to create modern AI systems. The skills developed throughout the program provide a strong foundation for future coursework in computer science, AI engineering, data literacy, critical thinking, and technical problem-solving."},
+  {id:"drafting-cad", name:"Drafting, CAD, 3D Printing", cat:"engineering", gmin:6, gmax:9, durs:[1.5,3], mat:"Laptop (include specs)",
+   desc:"Learn how engineers turn ideas into real products through sketching, technical drawing, CAD modeling, and 3D printing. Students will create digital designs using industry-standard software, develop engineering drawings, manufacture prototypes, and refine their designs through testing and iteration.",
+   out:"Students will discover how engineers and designers transform ideas into real products through sketching, digital modeling, prototyping, and testing. The skills developed throughout the program provide a strong foundation for engineering, architecture, product design, manufacturing, and a variety of personal projects."},
+  {id:"business", name:"Business Plan / Presentation Skills / Public Speaking", cat:"leadership", gmin:6, gmax:9, durs:[1.5,3], mat:"Laptop",
+   desc:"Transform an idea into a compelling business concept through market research, financial planning, branding, communication, and entrepreneurship. Students will work individually and in teams to identify problems, develop solutions, create business plans, design professional presentations, and deliver pitches that communicate the value of their ideas. Through hands-on activities and real-world case studies, students will explore the process of turning innovative ideas into viable businesses.",
+   out:"Students will discover how research, planning, communication, and creativity come together to bring ideas to life. The skills developed throughout the program provide a strong foundation for business, marketing, entrepreneurship, public speaking, leadership roles, academic presentations, DECA, TSA, future startup ventures, and professional careers. By the end of the program, students will have developed a complete business plan, created a professional presentation, and gained confidence presenting their ideas to others."},
+  {id:"personal-finance", name:"Personal Finance", cat:"leadership", gmin:6, gmax:9, durs:[1.5,3], mat:"Laptop",
+   desc:"Students will engage with core personal-finance concepts including budgeting, saving behavior, banking systems, credit and debt management, investing fundamentals, taxes, insurance, career-income planning, entrepreneurship, and post-secondary education costs. Through case studies, simulations, scenario-based exercises, and guided financial-planning activities, participants will learn to evaluate trade-offs, understand risk and return, interpret basic financial information, and apply quantitative reasoning to real-life money decisions.",
+   out:"Students will develop the financial knowledge, analytical skills, and decision-making confidence needed to manage money responsibly, evaluate financial opportunities and risks, and make informed choices related to budgeting, saving, credit, investing, education, careers, and long-term financial independence."},
+  {id:"bollywood", name:"Bollywood Dance", cat:"design", gmin:2, gmax:12, durs:[1.5], mat:"None",
+   desc:"An 8-week Bollywood Hip Hop dance program designed for middle and high school students who want to explore movement, creativity, and self-expression in a fun and supportive environment. Combining the vibrant energy of Bollywood dance with the dynamic style of Hip Hop, students will learn technique, musicality, performance skills, and teamwork while building confidence and having fun. The program will culminate in a special Bollywood Hip Hop Showcase for family and friends, where students perform the complete medley they have learned over the eight weeks — demonstrating their growth in technique, confidence, teamwork, and self-expression.",
+   out:"Students will discover how movement, fitness, creativity, and teamwork come together through dance and performance. The skills developed throughout the program provide a strong foundation for physical wellness, confidence, self-expression, collaboration, public performance, and personal growth."},
+  {id:"calligraphy", name:"Calligraphy / Hand-lettering", cat:"design", gmin:2, gmax:9, durs:[1.5], mat:"None",
+   desc:"Explore the art of beautiful writing through calligraphy, hand lettering, and design. Students will learn lettering techniques, brush-pen skills, layout principles, and decorative styles while creating personalized projects, cards, posters, and artwork.",
+   out:"Students will discover how creativity, precision, and visual design work together to communicate ideas effectively. The skills developed throughout the program provide a strong foundation for graphic design, typography, artistic expression, branding, and creative communication."},
+  {id:"crafts", name:"Crafts", cat:"design", gmin:2, gmax:9, durs:[1.5,3], mat:"None",
+   desc:"Students will explore a variety of artistic techniques while creating unique projects using materials such as paper, clay, beads, fabric, paint, and recycled items. Through guided activities and open-ended design challenges, students will learn how to transform simple materials into meaningful works of art while developing patience, attention to detail, and creative confidence.",
+   out:"Students will strengthen their creativity, fine-motor skills, and artistic expression through a wide range of hands-on projects. The skills developed throughout the program provide a strong foundation for design thinking, visual creativity, problem-solving, and independent project development."},
+  {id:"canvas", name:"Canvas Painting", cat:"design", gmin:2, gmax:9, durs:[1.5,3], mat:"None",
+   desc:"Students will learn fundamental painting techniques such as color mixing, shading, blending, texture creation, perspective, and composition. Through guided lessons and personalized artwork, students will create their own canvas pieces while building confidence in their artistic abilities and developing an appreciation for visual art.",
+   out:"Students will develop foundational painting skills while learning how to effectively communicate ideas through visual art. The techniques and artistic principles learned throughout the program provide a strong foundation for creative expression, artistic confidence, observation skills, and future art studies."},
+  {id:"drawing", name:"Drawing / Sketching", cat:"design", gmin:2, gmax:9, durs:[1.5,3], mat:"None",
+   desc:"Develop artistic skills by learning the fundamentals of drawing and sketching through engaging projects and creative exercises. Students will explore techniques such as line work, shading, perspective, proportions, texture, and character design while drawing a variety of subjects including animals, landscapes, objects, and imaginative creations. Through practice and guided instruction, students will gain confidence in turning ideas into detailed sketches and illustrations.",
+   out:"Students will strengthen their observation, visualization, and drawing skills while building confidence in their artistic abilities. The techniques learned throughout the program provide a strong foundation for illustration, design, creative thinking, visual communication, and future artistic development."},
+  {id:"science-olympiad", name:"Science Olympiad", cat:"competition", gmin:4, gmax:9, durs:[1.5,3], mat:"None", note:"Students pick their own event",
+   desc:"Explore exciting topics in science, engineering, and technology through hands-on investigations, problem-solving challenges, and team-based competitions. Students will choose an event that matches their interests, develop their knowledge through research and experimentation, and build critical-thinking skills while preparing for regional, state, and national Science Olympiad competitions.",
+   out:"Students will develop critical thinking, scientific inquiry, and problem-solving skills through research, experimentation, and competition. The knowledge and experience gained throughout the program provide a strong foundation for future STEM coursework, academic competitions, scientific research opportunities, and careers in science, engineering, and technology."},
+  {id:"tsa", name:"TSA", cat:"competition", gmin:6, gmax:9, durs:[1.5,3], mat:"None", note:"Students pick their own event",
+   desc:"Design, create, and innovate through engaging STEM projects and technology-focused competitions. Students will select a TSA event based on their interests, apply engineering and design principles, develop technical and leadership skills, and showcase their work through presentations, challenges, and competitive events at TSA conferences.",
+   out:"Students will strengthen their creativity, technical expertise, and leadership abilities by designing innovative solutions and completing technology-based projects. The skills developed throughout the program provide a strong foundation for future engineering and technology courses, competitive STEM programs, project-based learning, and careers in engineering, computer science, and related fields."}
+];
+
+const REG = "https://tinyurl.com/yt-steam-camp-2026";
+
+/* ---------- helpers ---------- */
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const priceFor = d => d===3 ? "$500" : "$300";
+const durLabel = d => (d===1.5 ? "1.5 hr" : "3 hr");
+
+/* ---------- render weeks ---------- */
+function renderWeeks(){
+  const tl = document.getElementById("weeksTimeline");
+  tl.innerHTML = WEEKS.map(w=>{
+    const p = PILLARS[w.cat];
+    const draftDesc = w.draft==="desc" ? ' <span title="Drafted — not in source sheet" style="color:var(--orange);font-weight:700">*</span>' : '';
+    const draftOut  = w.draft==="out"  ? ' <span title="Drafted — not in source sheet" style="color:var(--orange);font-weight:700">*</span>' : '';
+    return `
+    <article class="week reveal" id="week-${w.n}">
+      <div class="wk-num" style="background:linear-gradient(160deg,${p.color}cc,${p.color})"><span>${String(w.n).padStart(2,"0")}<small>WEEK</small></span></div>
+      <div class="wk-card" style="border-left:6px solid ${p.color}">
+        <div class="top">
+          <div>
+            <div class="title">${esc(w.name)}</div>
+            <div class="act">${esc(w.act)}</div>
+          </div>
+          <span class="tag pillar pc-${p.cls}">${esc(p.label)}</span>
+        </div>
+        <div class="body">
+          <div class="meta">
+            <span class="tag date">📅 ${esc(w.dates)}</span>
+            <span class="tag grade">Grades ${esc(w.grades)}</span>
+            <a class="tag dur" href="#topics" style="text-decoration:none">Half $300 · Full $500</a>
+          </div>
+          <p>${esc(w.desc)}${draftDesc}</p>
+          <details class="outcome">
+            <summary><span class="tw">▶</span> Learning outcomes</summary>
+            <p>${esc(w.out)}${draftOut}</p>
+          </details>
+          <div class="meta" style="margin-top:14px">
+            <a class="reglink" href="${REG}" target="_blank" rel="noopener">Register for this week ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+/* ---------- render activities ---------- */
+function renderActivities(){
+  const grid = document.getElementById("grid");
+  grid.innerHTML = ACTIVITIES.map(a=>{
+    const p = PILLARS[a.cat];
+    const durTags = a.durs.map(d=>`<span class="tag dur">${durLabel(d)} · ${priceFor(d)}</span>`).join("");
+    const blob = (a.name+" "+a.desc+" "+a.out+" "+a.mat+" "+p.label+(a.note?(" "+a.note):"")).toLowerCase();
+    const note = a.note ? `<span class="tag pillar pc-comp" style="background:#EEF1FA;color:var(--p-comp)">${esc(a.note)}</span>` : "";
+    return `
+    <article class="card reveal" id="act-${a.id}" style="--c:${p.color}"
+      data-cat="${a.cat}" data-gmin="${a.gmin}" data-gmax="${a.gmax}" data-durs="${a.durs.join(' ')}" data-search="${esc(blob)}">
+      <div class="ctop">
+        <h3>${esc(a.name)}</h3>
+        <span class="tag pillar pc-${p.cls}">${esc(p.label)}</span>
+      </div>
+      <div class="meta">
+        <span class="tag grade">Grades ${a.gmin}–${a.gmax}</span>
+        ${durTags}
+        <span class="tag date">📅 Jun 19 – Aug 16</span>
+        ${note}
+      </div>
+      <p class="desc">${esc(a.desc)}</p>
+      <details class="outcome">
+        <summary><span class="tw">▶</span> Learning outcomes</summary>
+        <p>${esc(a.out)}</p>
+      </details>
+      <div class="foot">
+        <span class="price-line">🎒 Materials: ${esc(a.mat)}</span>
+        <a class="reglink" href="${REG}" target="_blank" rel="noopener">Register ↗</a>
+      </div>
+    </article>`;
+  }).join("") + `<div class="noresult hidden" id="noResult">No topics match those filters. <button class="linkbtn" onclick="document.getElementById('reset').click()">Reset filters</button></div>`;
+}
+
+/* ---------- jump index ---------- */
+function renderJump(){
+  document.getElementById("jumpIdx").innerHTML = ACTIVITIES.map(a=>{
+    const c = PILLARS[a.cat].color;
+    return `<a href="#act-${a.id}" style="--c:${c}">${esc(a.name)}</a>`;
+  }).join("");
+}
+
+/* ---------- filtering ---------- */
+const state = { q:"", cats:new Set(), grade:"any", durs:new Set() };
+
+function applyFilters(){
+  const cards = document.querySelectorAll("#grid .card");
+  let shown = 0;
+  cards.forEach(c=>{
+    const cat = c.dataset.cat;
+    const gmin = +c.dataset.gmin, gmax = +c.dataset.gmax;
+    const durs = c.dataset.durs.split(" ");
+    let ok = true;
+    if(state.cats.size && !state.cats.has(cat)) ok = false;
+    if(ok && state.grade!=="any"){ const g=+state.grade; if(!(g>=gmin && g<=gmax)) ok=false; }
+    if(ok && state.durs.size){ ok = [...state.durs].some(d=>durs.includes(d)); }
+    if(ok && state.q){ ok = c.dataset.search.includes(state.q); }
+    c.classList.toggle("hidden", !ok);
+    if(ok) shown++;
+  });
+  const total = ACTIVITIES.length;
+  document.getElementById("count").innerHTML = `Showing <b>${shown}</b> of ${total} topics`;
+  document.getElementById("noResult").classList.toggle("hidden", shown!==0);
+  // dim pillar tiles not selected
+  document.querySelectorAll("#pillarLegend .pill-tile").forEach(t=>{
+    const sel = state.cats.size>0;
+    t.setAttribute("aria-pressed", state.cats.has(t.dataset.cat));
+    t.setAttribute("data-dim", (sel && !state.cats.has(t.dataset.cat)) ? "1" : "0");
+  });
+  document.querySelectorAll("#catRow .catbtn").forEach(b=>{
+    b.setAttribute("aria-pressed", state.cats.has(b.dataset.cat));
+  });
+}
+
+function toggleCat(cat){
+  state.cats.has(cat) ? state.cats.delete(cat) : state.cats.add(cat);
+  applyFilters();
+}
+
+/* ---------- wire up ---------- */
+function wire(){
+  document.getElementById("q").addEventListener("input", e=>{ state.q = e.target.value.trim().toLowerCase(); applyFilters(); });
+  document.getElementById("gradeSel").addEventListener("change", e=>{ state.grade = e.target.value; applyFilters(); });
+  ["dur15","dur3"].forEach(id=>{
+    const b = document.getElementById(id);
+    b.addEventListener("click", ()=>{
+      const d = b.dataset.dur;
+      const on = b.getAttribute("aria-pressed")==="true";
+      b.setAttribute("aria-pressed", String(!on));
+      on ? state.durs.delete(d) : state.durs.add(d);
+      applyFilters();
+    });
+  });
+  document.querySelectorAll("#catRow .catbtn").forEach(b=> b.addEventListener("click", ()=>toggleCat(b.dataset.cat)));
+  document.querySelectorAll("#pillarLegend .pill-tile").forEach(t=> t.addEventListener("click", ()=>{ toggleCat(t.dataset.cat); document.getElementById("topics").scrollIntoView({behavior:"smooth"}); }));
+  document.getElementById("reset").addEventListener("click", ()=>{
+    state.q=""; state.cats.clear(); state.grade="any"; state.durs.clear();
+    document.getElementById("q").value=""; document.getElementById("gradeSel").value="any";
+    ["dur15","dur3"].forEach(id=>document.getElementById(id).setAttribute("aria-pressed","false"));
+    applyFilters();
+  });
+}
+
+/* ---------- nav active state + reveal + back-to-top ---------- */
+function observers(){
+  const secs = ["overview","weeks","topics","pricing","register"].map(id=>document.getElementById(id)).filter(Boolean);
+  const links = {}; document.querySelectorAll("#navlinks a").forEach(a=> links[a.getAttribute("href").slice(1)] = a);
+  const navObs = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ Object.values(links).forEach(l=>l.classList.remove("active")); const l=links[e.target.id]; if(l) l.classList.add("active"); }});
+  }, {rootMargin:"-45% 0px -50% 0px"});
+  secs.forEach(s=>navObs.observe(s));
+
+  const revObs = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); revObs.unobserve(e.target); }});
+  }, {rootMargin:"0px 0px -8% 0px", threshold:0.05});
+  document.querySelectorAll(".reveal").forEach(el=>revObs.observe(el));
+
+  const toTop = document.getElementById("toTop");
+  toTop.addEventListener("click", ()=>window.scrollTo({top:0, behavior:"smooth"}));
+  window.addEventListener("scroll", ()=> toTop.classList.toggle("show", window.scrollY>700), {passive:true});
+}
+
+/* ---------- init ---------- */
+renderWeeks();
+renderActivities();
+renderJump();
+wire();
+applyFilters();
+observers();
+</script>
+</body>
+</html>
